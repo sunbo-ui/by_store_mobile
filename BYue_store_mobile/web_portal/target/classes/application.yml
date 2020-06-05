@@ -1,0 +1,29 @@
+server:
+  port: 9005
+
+spring:
+  application:
+    name: web-portal
+  #加载common模块的yml
+
+  profiles:
+    active: common
+  cloud:
+    nacos:   #整合gateway
+      discovery:
+        server-addr: 101.200.138.31:8849
+    sentinel:
+      transport:
+        dashboard: 101.200.138.31:8000
+  main:
+    allow-bean-definition-overriding: true
+#mybatis:
+#  type-aliases-package: com.mysb.core.pojo
+#  mapper-locations: classpath*:com.mysb.core.dao.*/*Dao.xml
+
+
+ahas:
+  namespace: default
+  license: 1ca86ce30b674baeb9ebd3d6aec198f1
+project:
+  name: web-portal

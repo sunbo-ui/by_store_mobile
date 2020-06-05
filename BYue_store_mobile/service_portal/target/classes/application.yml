@@ -1,0 +1,17 @@
+server:
+  port: 9006
+
+spring:
+  application:
+    name: service-portal
+  #加载common模块的yml
+  profiles:
+    active: common
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 101.200.138.31:8849
+
+mybatis:
+  type-aliases-package: com.mysb.core.pojo
+  mapper-locations: classpath*:com.mysb.core.dao.*/*Dao.xml

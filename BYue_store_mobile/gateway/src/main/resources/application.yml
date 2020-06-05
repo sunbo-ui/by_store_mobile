@@ -1,0 +1,30 @@
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %clr(%5p) %clr(-){faint} %clr(%-80.80logger{79}){cyan} %clr(:) %m%n"
+
+server:
+  port: 9010
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  #加载common模块的yml
+  profiles:
+    active: common
+  application:
+    name: api-gateway #此实例注册到eureka服务端的name
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 101.200.138.31:8849
+    gateway:
+      discovery:
+        locator:
+          enabled: true #从nacos当中获取服务信息
+      routes: #当请求满足要求时，转发到指定的服务当中
+        - id: portal_route  #唯一标识，默认是uuid
+          uri: http://localhost:9005/ #请求要转发的地址
+          order: 1 #路由优先级 越小， 优先级越高
+          predicates: #谓词，断言（条件判断 转发请求要满足什么条件）
+            - Path=/**  #当路径中有指定内容时， 才会转发到指定uri
+
